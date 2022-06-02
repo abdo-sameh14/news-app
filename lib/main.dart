@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:news_app/layout/layout_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +14,33 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ,
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Colors.white,
+            statusBarIconBrightness: Brightness.dark
+          ),
+          elevation: 0,
+          // backwardsCompatibility: false,
+          iconTheme: IconThemeData(
+            color: Colors.black,
+          ),
+          color: Colors.white,
+          titleTextStyle: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: Colors.black
+          ),
+        ),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: Colors.deepOrange,
+          elevation: 20,
+          backgroundColor: Colors.white
+        ),
+        scaffoldBackgroundColor: Colors.white
+      ),
+      home: const NewsLayoutScreen(),
     );
   }
 }

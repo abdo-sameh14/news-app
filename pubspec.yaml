@@ -27,6 +27,15 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  sqflite: ^2.0.2+1
+  intl: ^0.17.0
+  conditional_builder_null_safety: ^0.0.6
+  bloc: ^8.0.3
+  flutter_bloc: ^8.0.1
+  introduction_screen: ^3.0.2
+  shared_preferences: ^2.0.15
+  animated_splash_screen: ^1.2.0
+
   flutter:
     sdk: flutter
 
