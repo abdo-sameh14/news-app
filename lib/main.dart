@@ -1,9 +1,23 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:news_app/layout/layout_screen.dart';
+import 'package:news_app/shared/network/remote/dio_helper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'shared/styles/bloc_observer.dart';
+
+void main() async {
+  BlocOverrides.runZoned(
+        () async {
+      // WidgetsFlutterBinding.ensureInitialized();
+      // final prefs = await SharedPreferences.getInstance();
+      // show = prefs.getBool('INTRODUCTION') ?? true;
+          DioHelper.init();
+          runApp(const MyApp());
+    },
+    blocObserver: MyBlocObserver(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,6 +29,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        primarySwatch: Colors.deepOrange,
         appBarTheme: const AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Colors.white,
@@ -40,7 +55,9 @@ class MyApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: Colors.white
       ),
-      home: const NewsLayoutScreen(),
+      home: Directionality(
+          textDirection: TextDirection.rtl,
+          child: const NewsLayoutScreen()),
     );
   }
 }
