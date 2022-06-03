@@ -5,6 +5,7 @@ import 'package:news_app/moduels/business_screen/business_screen.dart';
 import 'package:news_app/moduels/science_screen/science_screen.dart';
 import 'package:news_app/moduels/settings_screen/settings_screen.dart';
 import 'package:news_app/moduels/sports_screen/sports.dart';
+import 'package:news_app/shared/network/remote/dio_helper.dart';
 
 class NewsCubit extends Cubit<NewsAppStates> {
   NewsCubit() : super(NewsAppInitialState());
@@ -41,7 +42,81 @@ class NewsCubit extends Cubit<NewsAppStates> {
 
   void changeBotNavBarIndex(index){
     currentIndex = index;
-
+    if (index == 1){
+      getSports();
+    }
+    if (index == 2){
+      getScience();
+    }
     emit(NewsAppBotNavState());
+  }
+
+  List business = [];
+
+  void getBusiness(){
+    emit(NewsGetBusinessLoadingState());
+
+    if (business.isEmpty){
+      DioHelper.getData(
+          url: 'v2/top-headlines',
+          query: {
+            'country':'eg',
+            'category':'business',
+            'apiKey':'ab4556f7a2b24bfd8da4080aef8a74d8',
+          }).then((value) {
+        business = value.data['articles'];
+        emit(NewsGetBusinessSuccessState());
+      }).catchError((error){
+        print(error.toString());
+        emit(NewsGetBusinessErrorState(error.toString()));
+      });
+    }
+    else {
+      emit(NewsGetBusinessSuccessState());
+    }
+  }
+
+  List sports = [];
+
+  void getSports(){
+    emit(NewsGetSportsLoadingState());
+
+    if(sports.isEmpty){DioHelper.getData(
+        url: 'v2/top-headlines',
+        query: {
+          'country':'eg',
+          'category':'sports',
+          'apiKey':'ab4556f7a2b24bfd8da4080aef8a74d8',
+        }).then((value) {
+      sports = value.data['articles'];
+      emit(NewsGetSportsSuccessState());
+    }).catchError((error){
+      print(error.toString());
+      emit(NewsGetSportsErrorState(error.toString()));
+    },
+    );
+    }
+    else{emit(NewsGetSportsSuccessState());}
+
+  }
+
+  List science = [];
+
+  void getScience(){
+    emit(NewsGetScienceLoadingState());
+    if(science.isEmpty){DioHelper.getData(
+        url: 'v2/top-headlines',
+        query: {
+          'country':'eg',
+          'category':'science',
+          'apiKey':'ab4556f7a2b24bfd8da4080aef8a74d8',
+        }).then((value) {
+      science = value.data['articles'];
+      emit(NewsGetScienceSuccessState());
+    }).catchError((error){
+      print(error.toString());
+      emit(NewsGetScienceErrorState(error.toString()));
+    });}
+    else{emit(NewsGetScienceSuccessState());}
   }
 }
