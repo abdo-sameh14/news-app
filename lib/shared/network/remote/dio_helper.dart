@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:dio/adapter.dart';
+
 
 class DioHelper{
 
   static Dio? dio;
+
 
   static init(){
    dio = Dio(
@@ -11,6 +16,13 @@ class DioHelper{
         receiveDataWhenStatusError: true
       )
     );
+   (dio?.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+       (HttpClient client) {
+     client.badCertificateCallback =
+         (X509Certificate cert, String host, int port) => true;
+     return client;
+   };
+
   }
 
   static Future<Response> getData({

@@ -5,6 +5,7 @@ import 'package:news_app/moduels/business_screen/business_screen.dart';
 import 'package:news_app/moduels/science_screen/science_screen.dart';
 import 'package:news_app/moduels/settings_screen/settings_screen.dart';
 import 'package:news_app/moduels/sports_screen/sports.dart';
+import 'package:news_app/shared/network/local/chache%20_helper.dart';
 import 'package:news_app/shared/network/remote/dio_helper.dart';
 
 class NewsCubit extends Cubit<NewsAppStates> {
@@ -34,10 +35,10 @@ class NewsCubit extends Cubit<NewsAppStates> {
       icon: Icon(Icons.science),
       label: 'Science',
     ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.settings),
-      label: 'Settings',
-    ),
+    // const BottomNavigationBarItem(
+    //   icon: Icon(Icons.settings),
+    //   label: 'Settings',
+    // ),
   ];
 
   void changeBotNavBarIndex(index){
@@ -118,5 +119,20 @@ class NewsCubit extends Cubit<NewsAppStates> {
       emit(NewsGetScienceErrorState(error.toString()));
     });}
     else{emit(NewsGetScienceSuccessState());}
+  }
+
+  bool? darkMode = false;
+
+  void toggleDarkMode({bool? fromShared}){
+    if(fromShared != null){
+      darkMode = fromShared;
+      emit(NewsChangeThemeModeState());
+    }
+    else {
+      darkMode = !darkMode!;
+      CacheHelper?.setBool(key: 'isDark', value: darkMode!);
+      emit(NewsChangeThemeModeState());
+    }
+
   }
 }
