@@ -9,33 +9,36 @@ class NewsLayoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => NewsCubit()..getBusiness(),
-      child: BlocConsumer<NewsCubit, NewsAppStates>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          var cubit = NewsCubit.get(context);
-          return Scaffold(
-              appBar: AppBar(
-                title: const Text('News App'),
-                actions: [
-                  IconButton(
-                    onPressed: (){},
-                    icon: const Icon(Icons.search),
-                  ),
-                ],
-              ),
-              bottomNavigationBar: BottomNavigationBar(
-                currentIndex: cubit.currentIndex,
-                onTap: (index){
-                  cubit.changeBotNavBarIndex(index);
-                },
-                items: cubit.botNavBarItems,
-              ),
-            body: cubit.screen[cubit.currentIndex],
-            );
-        },
-      ),
+    return BlocConsumer<NewsCubit, NewsAppStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var cubit = NewsCubit.get(context);
+        return Scaffold(
+            appBar: AppBar(
+              title: const Text('News App'),
+              actions: [
+                IconButton(
+                  onPressed: (){},
+                  icon: const Icon(Icons.search),
+                ),
+                IconButton(
+                  onPressed: (){
+                    cubit.toggleDarkMode();
+                  },
+                  icon: const Icon(Icons.brightness_4_outlined),
+                ),
+              ],
+            ),
+            bottomNavigationBar: BottomNavigationBar(
+              currentIndex: cubit.currentIndex,
+              onTap: (index){
+                cubit.changeBotNavBarIndex(index);
+              },
+              items: cubit.botNavBarItems,
+            ),
+          body: cubit.screen[cubit.currentIndex],
+          );
+      },
     );
   }
 }

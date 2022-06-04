@@ -1,15 +1,15 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 
-Widget buildArticleItem(Map article) => Padding(
+Widget buildArticleItem(Map article, context) => Padding(
   padding: const EdgeInsets.all(20.0),
   child: Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Container(
+      SizedBox(
+        width: 160,
+        height: 120,
         child: article['urlToImage'] != null? Container(
-          width: 150,
-          height: 120,
           decoration: BoxDecoration(
             // color: Colors.deepOrange,
             borderRadius: BorderRadius.circular(15),
@@ -17,12 +17,10 @@ Widget buildArticleItem(Map article) => Padding(
                 image: NetworkImage(
                   '${article['urlToImage']}'
                 ),
-                fit: BoxFit.fill
+                fit: BoxFit.cover
             ),
           ),
         ) : Container(
-          width: 150,
-          height: 120,
           decoration: BoxDecoration(
             color: Colors.deepOrange,
             borderRadius: BorderRadius.circular(15),
@@ -32,9 +30,9 @@ Widget buildArticleItem(Map article) => Padding(
               'Image Not Found!',
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white
-              ),
+                fontSize: 18,
+                color: Colors.white
+              )
             ),
           ),
         ),
@@ -51,21 +49,14 @@ Widget buildArticleItem(Map article) => Padding(
               '${article['title']}',
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600
-              ),
+              style: Theme.of(context).textTheme.bodyText1
             ),
             const SizedBox(
               height: 5,
             ),
             Text(
               '${article['publishedAt']}',
-              style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.grey
-              ),
+              style: Theme.of(context).textTheme.bodyText2
             ),
           ],
         ),
@@ -84,7 +75,7 @@ Widget buildArticles(list) => ConditionalBuilder(
     condition: list.isNotEmpty,
     builder: (context) => ListView.separated(
         physics: const BouncingScrollPhysics(),
-        itemBuilder: (context, index) => buildArticleItem(list[index]),
+        itemBuilder: (context, index) => buildArticleItem(list[index], context),
         separatorBuilder: (context, index) => mySeparator(),
         itemCount: list.length),
     fallback: (context) => const Center(child: CircularProgressIndicator()));
