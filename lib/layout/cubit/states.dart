@@ -34,6 +34,16 @@ class NewsGetScienceErrorState extends NewsAppStates {
   NewsGetScienceErrorState(this.error);
 }
 
+class NewsGetSearchLoadingState extends NewsAppStates {}
+
+class NewsGetSearchSuccessState extends NewsAppStates {}
+
+class NewsGetSearchErrorState extends NewsAppStates {
+
+  String error;
+  NewsGetSearchErrorState(this.error);
+}
+
 class NewsChangeThemeModeState extends NewsAppStates {}
 
 
