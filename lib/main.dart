@@ -1,3 +1,5 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,7 +42,7 @@ class MyApp extends StatelessWidget {
       child: BlocConsumer<NewsCubit, NewsAppStates>(
         listener: (BuildContext context, state) {  },
         builder: (BuildContext context, Object? state) {
-          bool darkModeOn = NewsCubit.get(context).darkMode!;
+          bool darkModeOn = NewsCubit.get(context).darkMode;
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
@@ -126,7 +128,49 @@ class MyApp extends StatelessWidget {
               )
             ),
             themeMode: darkModeOn ? ThemeMode.dark : ThemeMode.light,
-            home: const NewsLayoutScreen(),
+            home: AnimatedSplashScreen(
+              splash: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Spacer(),
+                    Image.asset('assets/images/app-logo.png',
+                      scale: 8,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Akhbarak',
+                      style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white.withOpacity(.87)
+                      ),
+                    ),
+                    // SizedBox(
+                    //   height: 100,
+                    // ),
+                    const Spacer(),
+                    Image.asset('assets/images/logo.png',
+                      width: 55,
+                      height: 55,
+                    ),
+                  ],
+                ),
+              ),
+              nextScreen:  const NewsLayoutScreen(),
+              backgroundColor: const Color(0xff212121),
+              // darkModeOn ? const Color(0xff212121) : Colors.white.withOpacity(.87),
+              animationDuration: const Duration(seconds: 1),
+              // splashTransition: SplashTransition.,
+              // centered: true,
+              pageTransitionType: PageTransitionType.fade,
+              duration: 2000,
+              splashIconSize: double.infinity,
+            ),
+            // const NewsLayoutScreen(),
           );
         },
       ),
