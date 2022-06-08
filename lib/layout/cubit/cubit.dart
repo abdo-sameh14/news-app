@@ -121,7 +121,7 @@ class NewsCubit extends Cubit<NewsAppStates> {
     else{emit(NewsGetScienceSuccessState());}
   }
 
-  bool? darkMode = false;
+  bool darkMode = false;
 
   void toggleDarkMode({bool? fromShared}){
     if(fromShared != null){
@@ -129,8 +129,8 @@ class NewsCubit extends Cubit<NewsAppStates> {
       emit(NewsChangeThemeModeState());
     }
     else {
-      darkMode = !darkMode!;
-      CacheHelper?.setBool(key: 'isDark', value: darkMode!);
+      darkMode = !darkMode;
+      CacheHelper?.setBool(key: 'isDark', value: darkMode);
       emit(NewsChangeThemeModeState());
     }
 
