@@ -1,7 +1,7 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:dio/adapter.dart';
+import 'package:flutter/foundation.dart';
 
 
 class DioHelper{
@@ -16,12 +16,14 @@ class DioHelper{
         receiveDataWhenStatusError: true
       )
     );
-   (dio?.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-       (HttpClient client) {
-     client.badCertificateCallback =
-         (X509Certificate cert, String host, int port) => true;
-     return client;
-   };
+   if(!kIsWeb){
+     (dio?.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+         (HttpClient client) {
+       client.badCertificateCallback =
+           (X509Certificate cert, String host, int port) => true;
+       return client;
+
+   };}
 
   }
 
