@@ -14,6 +14,10 @@ class NewsGetBusinessErrorState extends NewsAppStates {
   NewsGetBusinessErrorState(this.error);
 }
 
+class NewsSelectBusinessItemSuccessState extends NewsAppStates {}
+
+class NewsSetDesktopSuccessState extends NewsAppStates {}
+
 class NewsGetSportsLoadingState extends NewsAppStates {}
 
 class NewsGetSportsSuccessState extends NewsAppStates {}

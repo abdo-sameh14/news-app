@@ -92,6 +92,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
+  desktop_webview_window:
+    dependency: "direct main"
+    description:
+      name: desktop_webview_window
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.6"
   desktop_window:
     dependency: "direct main"
     description:
@@ -483,6 +490,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.7.5"
+  webview_windows:
+    dependency: "direct main"
+    description:
+      name: webview_windows
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   win32:
     dependency: transitive
     description:

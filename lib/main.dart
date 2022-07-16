@@ -54,76 +54,83 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-                primarySwatch: Colors.deepOrange,
-                appBarTheme: const AppBarTheme(
-                  titleSpacing: 20,
-                  systemOverlayStyle: SystemUiOverlayStyle(
-                      statusBarColor: Colors.white,
-                      statusBarIconBrightness: Brightness.dark),
-                  elevation: 0,
-                  // backwardsCompatibility: false,
-                  iconTheme: IconThemeData(
-                    color: Colors.black,
-                  ),
-                  color: Colors.white,
-                  titleTextStyle: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black),
+              appBarTheme: const AppBarTheme(
+                titleSpacing: 20,
+                systemOverlayStyle: SystemUiOverlayStyle(
+                    statusBarColor: Colors.white,
+                    statusBarIconBrightness: Brightness.dark),
+                elevation: 0,
+                // backwardsCompatibility: false,
+                iconTheme: IconThemeData(
+                  color: Colors.black,
                 ),
-                bottomNavigationBarTheme: BottomNavigationBarThemeData(
-                    type: BottomNavigationBarType.fixed,
-                    selectedItemColor: Colors.deepOrange,
-                    unselectedItemColor: Colors.grey[600],
-                    elevation: 20,
-                    backgroundColor: Colors.white),
-                scaffoldBackgroundColor: Colors.white,
-                textTheme: TextTheme(
-                  bodyText1: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black),
-                  bodyText2: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white.withOpacity(0.6)),
-                )),
-            darkTheme: ThemeData(
-                primarySwatch: Colors.deepOrange,
-                appBarTheme: AppBarTheme(
-                  titleSpacing: 20,
-                  systemOverlayStyle: const SystemUiOverlayStyle(
-                      statusBarColor: Color(0xff121212),
-                      statusBarIconBrightness: Brightness.light),
-                  elevation: 0,
-                  // backwardsCompatibility: false,
-                  iconTheme: const IconThemeData(
-                    color: Colors.white,
-                  ),
-                  color: Colors.grey[900],
-                  titleTextStyle: const TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-                bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                color: Colors.white,
+                titleTextStyle: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+              ),
+              bottomNavigationBarTheme: BottomNavigationBarThemeData(
                   type: BottomNavigationBarType.fixed,
                   selectedItemColor: Colors.deepOrange,
-                  unselectedItemColor: Colors.grey,
+                  unselectedItemColor: Colors.grey[600],
                   elevation: 20,
-                  backgroundColor: Colors.grey[900],
+                  backgroundColor: Colors.white),
+              scaffoldBackgroundColor: Colors.white,
+              textTheme: TextTheme(
+                bodyText1: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black),
+                bodyText2: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.grey[500]),
+              ),
+              colorScheme: ColorScheme.fromSwatch(
+                primarySwatch: Colors.deepOrange,
+              ).copyWith(secondary: Colors.grey[300]),
+            ),
+            darkTheme: ThemeData(
+              primarySwatch: Colors.deepOrange,
+              appBarTheme: AppBarTheme(
+                titleSpacing: 20,
+                systemOverlayStyle: const SystemUiOverlayStyle(
+                    statusBarColor: Color(0xff121212),
+                    statusBarIconBrightness: Brightness.light),
+                elevation: 0,
+                // backwardsCompatibility: false,
+                iconTheme: const IconThemeData(
+                  color: Colors.white,
                 ),
-                scaffoldBackgroundColor: const Color(0xff121212),
-                textTheme: TextTheme(
-                  bodyText1: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white.withOpacity(.87)),
-                  bodyText2: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white.withOpacity(0.6)),
-                )),
+                color: Colors.grey[900],
+                titleTextStyle: const TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+              bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                type: BottomNavigationBarType.fixed,
+                selectedItemColor: Colors.deepOrange,
+                unselectedItemColor: Colors.grey,
+                elevation: 20,
+                backgroundColor: Colors.grey[900],
+              ),
+              scaffoldBackgroundColor: const Color(0xff121212),
+              textTheme: TextTheme(
+                bodyText1: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white.withOpacity(.87)),
+                bodyText2: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white.withOpacity(0.6)),
+              ),
+              colorScheme: ColorScheme.fromSwatch(
+                primarySwatch: Colors.deepOrange,
+              ).copyWith(secondary: Colors.grey[600]),
+            ),
             themeMode: darkModeOn ? ThemeMode.dark : ThemeMode.light,
             home: AnimatedSplashScreen(
               splash: Padding(
@@ -158,24 +165,7 @@ class MyApp extends StatelessWidget {
                   ],
                 ),
               ),
-              nextScreen: ScreenTypeLayout(
-                mobile: const NewsLayoutScreen(),
-                desktop: const Scaffold(
-                  body: Center(
-                    child: Text(
-                      'Desktop',
-                      style: TextStyle(
-                        fontSize: 100,
-                      ),
-                    ),
-                  ),
-                ),
-                breakpoints: const ScreenBreakpoints(
-                  desktop: 650,
-                  watch: 300,
-                  tablet: 300,
-                ),
-              ),
+              nextScreen: const NewsLayoutScreen(),
               backgroundColor: const Color(0xff212121),
               // darkModeOn ? const Color(0xff212121) : Colors.white.withOpacity(.87),
               animationDuration: const Duration(seconds: 1),
